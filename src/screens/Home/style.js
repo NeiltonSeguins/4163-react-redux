@@ -5,7 +5,7 @@ export const Container = styled.div`
   grid-template-columns: 280px 1fr;
   grid-template-rows: auto auto 1fr auto;
   gap: var(--gap-s);
-  min-width: 1200px;
+  min-width: 1260px;
   box-sizing: border-box;
   grid-template-areas:
     "sidebar search"
