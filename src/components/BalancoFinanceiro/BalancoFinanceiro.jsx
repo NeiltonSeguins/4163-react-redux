@@ -12,6 +12,8 @@ import {
   Legend,
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import { gastosPorCategoria } from "src/redux/selectors/gastosPorCategoriaSelector";
 
 ChartJS.register(
   ArcElement,
@@ -29,10 +31,13 @@ export const AreaChart = styled.div`
 `;
 
 const BalancoFinanceiro = () => {
+  const categoriasAgrupada = useSelector(gastosPorCategoria);
   const data = {
+    labels: Object.keys(categoriasAgrupada),
     datasets: [
       {
         label: "Gastos por categoria",
+        data: Object.values(categoriasAgrupada),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -52,12 +57,21 @@ const BalancoFinanceiro = () => {
     ],
   };
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "right",
+      },
+    },
+  };
+
   return (
     <Cartao>
       <CartaoCabecalho>Gastos por categoria</CartaoCabecalho>
       <CartaoCorpo>
         <AreaChart>
-          <Pie data={data} />
+          <Pie data={data} options={options} />
         </AreaChart>
       </CartaoCorpo>
     </Cartao>
